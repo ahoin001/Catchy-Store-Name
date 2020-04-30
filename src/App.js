@@ -5,6 +5,7 @@ import Shop from './pages/shop/Shop';
 import { Switch, Route } from "react-router-dom";
 import './App.css'
 import Header from './components/navigation/Header';
+import UserAuth from './pages/user-handling/User-Auth';
 
 const App = () => {
   return (
@@ -18,6 +19,10 @@ const App = () => {
 
         <Route exact path="/">
           <HomePage />
+        </Route>
+
+        <Route path="/signin">
+         <UserAuth/>
         </Route>
 
         <Route path="/shop">
