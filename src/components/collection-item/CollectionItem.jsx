@@ -4,11 +4,11 @@ import './collection-item.scss'
 
 const CollectionItem = (props) => {
     return (
-        <div className= "collection-item">
-            
-            <div 
-            className='collection-item-image'
-            style = {{ backgroundImage: `url(${props.imageUrl})`}}>
+        <div className="collection-item">
+
+            <div
+                className='collection-item-image'
+                style={{ backgroundImage: `url(${props.imageUrl})` }}>
 
             </div>
 
