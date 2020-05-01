@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import Login from '../../components/login/Login'
+import Login from '../../components/login/DynamicLogin'
+import { googleSignIn } from '../../components/config/firebase/firebase-util'
 
 const UserAuth = () => {
 
@@ -50,7 +51,17 @@ const UserAuth = () => {
                         <input type="password" />
                     </label>
                     <button type="button" className="submit">Sign Up</button>
-                    <button type="button" className="fb-btn">Join with <span>facebook</span></button>
+
+                    <button
+                        onClick={googleSignIn}
+                        type="button"
+                        className="fb-btn"
+
+                    >
+
+                        Join with <span>Google</span>
+
+                    </button>
 
                 </div>
 
