@@ -267,6 +267,22 @@ input {
   }
 }
 
+.google-btn {
+  border: 2px solid #d3dae9;
+  background-color: white;
+  color: darken(#d3dae9, 20%);
+
+  span {
+    font-weight: bold;
+    color: darken(#768cb6, 20%);
+  }
+
+  &:hover {
+    background-color: #357ae8;
+    border: none;
+  }
+}
+
 .sign-in {
   transition-timing-function: ease-out;
 

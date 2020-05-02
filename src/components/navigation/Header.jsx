@@ -33,7 +33,7 @@ const Header = (props) => {
                     SHOP
                 </Link>
 
-                <Link className="link" to="/signin">
+                <Link className="link" to="/">
                     Contact
                 </Link>
 
