@@ -1,13 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import HomePage from "./pages/homepage/HomePage";
 import Shop from './pages/shop/Shop';
+import UserAuth from './pages/user-handling/User-Auth';
+import Header from './components/navigation/Header';
 
 import { Switch, Route } from "react-router-dom";
+import { auth } from './components/config/firebase/firebase-util'
 import './App.css'
-import Header from './components/navigation/Header';
-import UserAuth from './pages/user-handling/User-Auth';
 
 const App = () => {
+
+  const [currentUser, setCurrentUser] = useState({})
+
+  useEffect(() => {
+
+    auth.onAuthStateChanged((user) => {
+
+      setCurrentUser({ ...currentUser, user })
+      console.log(user)
+    })
+
+  }, [])
+
+
   return (
 
     <div className="App">
@@ -22,7 +37,7 @@ const App = () => {
         </Route>
 
         <Route path="/signin">
-         <UserAuth/>
+          <UserAuth />
         </Route>
 
         <Route path="/shop">

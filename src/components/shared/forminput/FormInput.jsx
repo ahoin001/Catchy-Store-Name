@@ -4,7 +4,7 @@ import './forminput.scss';
 // ? Destrcuct values and object from props object
 const FormInput = ({ handleChange, label, ...otherProps }) => {
 
-    console.log({ otherProps })
+    // console.log({ otherProps })
 
     return (
         <div className={`group $`}>
