@@ -10,15 +10,32 @@ import './App.css'
 
 const App = () => {
 
-  const [currentUser, setCurrentUser] = useState({})
+  const [currentUser, setCurrentUser] = useState()
 
   useEffect(() => {
 
-    auth.onAuthStateChanged((user) => {
+    let unsubscribeFromAuth;
 
-      setCurrentUser({ ...currentUser, user })
-      console.log(user)
-    })
+    // ? This open subscription stays open as long as this component is mounted
+    const getUser = async () => {
+
+      // https://firebase.google.com/docs/auth/web/manage-users?authuser=0
+      // ? onAuthStateChanged will set observer to keep track of user being signed in (Listens to any user signed in changes across our firebase project and will update if our user is signed in or signed out)
+      // ? It also returns an unsubscribe function that I will use when component unmounts
+
+      unsubscribeFromAuth = await auth.onAuthStateChanged((user) => {
+
+        setCurrentUser(user)
+        console.log(user)
+      })
+    }
+
+    getUser();
+
+    // ? unsub when component unmounts
+    return () => {
+      unsubscribeFromAuth();
+    }
 
   }, [])
 
@@ -28,7 +45,7 @@ const App = () => {
     <div className="App">
 
       {/* Place Header here so it persists above all components rendered by switch */}
-      <Header />
+      <Header currentUser={currentUser} />
 
       <Switch>
 
