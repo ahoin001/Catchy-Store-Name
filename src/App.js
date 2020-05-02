@@ -20,7 +20,7 @@ const App = () => {
     const getUser = async () => {
 
       // https://firebase.google.com/docs/auth/web/manage-users?authuser=0
-      // ? onAuthStateChanged will set observer to keep track of user being signed in (Listens to any user signed in changes across our firebase project and will update if our user is signed in or signed out)
+      // ? onAuthStateChanged will set observer to keep track of user state activity (Listens to any user sign in changes across our firebase project and will update if our user is signed in or signed out)
       // ? It also returns an unsubscribe function that I will use when component unmounts
 
       unsubscribeFromAuth = await auth.onAuthStateChanged((user) => {

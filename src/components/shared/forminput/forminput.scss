@@ -13,16 +13,17 @@ $main-color: black;
 
   .form-input {
     background: none;
+    width: 80%;
+    margin: 0 auto;
+
     // background-color: white;
     color: $sub-color;
     font-size: 18px;
     padding: 10px 10px 10px 5px;
     display: block;
-    width: 100%;
     border: none;
     border-radius: 0;
     border-bottom: 1px solid $sub-color;
-    margin: 25px 0;
 
     &:focus {
       outline: none;
@@ -43,7 +44,7 @@ $main-color: black;
     font-weight: normal;
     position: absolute;
     pointer-events: none;
-    left: 5px;
+    left: 60px;
     top: 10px;
     transition: 300ms ease all;
 
