@@ -48,8 +48,8 @@ const App = (props) => {
           })
 
         } else {
-          console.log(userAuth)
-          //  set current user to null (onAuth will return null if user signs out )
+          // console.log(userAuth)
+          // ? set current user to null (onAuth will return null if user signs out )
           props.setCurrentUser(userAuth)
         }
 
