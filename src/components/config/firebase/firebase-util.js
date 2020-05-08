@@ -33,22 +33,20 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     if (!userAuth) return;
 
-    // ? Create user in database with ID provided by user from auth (auth has it's own cloud of signed in users)
-    // ? Returns document for manipulation
+    // ? Get query reference object from FIrebase at locatoion to get snapshot
     const userRef = firestore.doc(`users/${userAuth.uid}`);
-
     const snapShot = await userRef.get();
-    // console.log(`SNAPSHOT OF USR Created in DOC :`, snapShot)
-    // console.log(`SNAPSHOT OF USR AFTER DOC CREATED BEFORE GETTING DOC DATA`, snapShot.exists)
 
-    // ? Check for any data in the Doc (At this point there should be no data and we are checking the doc by it's id)
+
+    // ? Check if anything exsists in this location, create a document if not
     if (!snapShot.exists) {
 
-        // ? Provide user data for the doc from the user data saved in auth
+        // ? Provide user data for the doc from the user provided in argument
         const { name, email } = userAuth;
         const createdAt = new Date();
 
         try {
+            // ?use document refrence for CRUD operations (create in this case)
             await userRef.set({
                 name,
                 email,
@@ -60,6 +58,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         }
     }
 
+    // ? Return userRef in case more changes are wanted to be made
     return userRef;
 
 };

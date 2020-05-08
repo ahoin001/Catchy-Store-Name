@@ -1,34 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { Switch, Route } from "react-router-dom";
+import { connect } from 'react-redux'
+
+import { setCurrentUser } from "./redux/user/user-actions";
+
+
 import HomePage from "./pages/homepage/HomePage";
 import Shop from './pages/shop/Shop';
 import UserAuth from './pages/user-handling/User-Auth';
-import Header from './components/navigation/Header';
 
-import { Switch, Route } from "react-router-dom";
-import { auth } from './components/config/firebase/firebase-util'
+import Header from './components/navigation/Header';
+import { auth, createUserProfileDocument } from './components/config/firebase/firebase-util'
+
+
 import './App.css'
 
-const App = () => {
+const App = (props) => {
 
-  const [currentUser, setCurrentUser] = useState()
+  // const [currentUser, setCurrentUser] = useState()
+  console.log(props)
+  useEffect((props) => {
 
-  useEffect(() => {
+    let unsubscribeFromAuth = null;
 
-    let unsubscribeFromAuth;
-
-    // ? This open subscription stays open as long as this component is mounted
     const getUser = async () => {
 
       // https://firebase.google.com/docs/auth/web/manage-users?authuser=0
+      // ? This open subscription stays open as long as this component is mounted
       // ? onAuthStateChanged will set observer to keep track of user state activity (Listens to any user sign in changes across our firebase project and will update if our user is signed in or signed out)
       // ? It also returns an unsubscribe function that I will use when component unmounts
 
-
       // user parameter is given by auth user state
-      unsubscribeFromAuth = await auth.onAuthStateChanged((user) => {
+      unsubscribeFromAuth = await auth.onAuthStateChanged(async (userAuth) => {
 
-        setCurrentUser(user)
-        console.log(user)
+        if (userAuth) {
+
+          const userRef = await createUserProfileDocument(userAuth)
+
+          // ? set listener for any changes of data at that ref, and also get the original state of it to set data
+          userRef.onSnapshot((snapShot) => {
+
+           
+            props.setCurrentUser({
+
+              id: snapShot.id, ...snapShot.data()
+
+            })
+
+          })
+
+        } else {
+
+          //  set current user to null (onAuth will return null if user signs out )
+          props.setCurrentUser(userAuth)
+        }
+
+
       })
     }
 
@@ -47,7 +74,7 @@ const App = () => {
     <div className="App">
 
       {/* Place Header here so it persists above all components rendered by switch */}
-      <Header currentUser={currentUser} />
+      <Header />
 
       <Switch>
 
@@ -70,4 +97,19 @@ const App = () => {
   );
 };
 
-export default App;
+// ? dispatch function provided by connect
+const mapDispatchToProps = (dispatch) => {
+
+  // 
+  return {
+
+    // ? Dispatch excecutes action creator function with user argument and returns the action object for dispatch excecution
+    setCurrentUser: user => dispatch(setCurrentUser(user))
+
+
+  }
+
+}
+
+
+export default connect(null, mapDispatchToProps)(App);

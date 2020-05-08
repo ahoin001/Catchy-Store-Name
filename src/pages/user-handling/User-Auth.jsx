@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Login from '../../components/login/DynamicLogin'
-import { googleSignIn } from '../../components/config/firebase/firebase-util'
 import SignUp from '../../components/login/DynamicSignUp'
 
 const UserAuth = () => {
