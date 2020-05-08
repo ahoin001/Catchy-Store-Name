@@ -13,6 +13,8 @@ import './header-styles.scss'
 
 const Header = (props) => {
 
+    console.log(`PROPS FROM HEADER: `, props)
+
     const signOut = async () => {
         await auth.signOut()
             .then(() => props.history.push('/'))

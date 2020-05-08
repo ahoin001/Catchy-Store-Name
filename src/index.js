@@ -16,7 +16,7 @@ ReactDOM.render(
 
       <Router>
 
-        <App aProp="prop"/>
+        <App/>
 
       </Router>
 

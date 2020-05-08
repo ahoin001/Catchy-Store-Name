@@ -17,8 +17,6 @@ import './App.css'
 
 const App = (props) => {
 
-  // const [currentUser, setCurrentUser] = useState()
-  console.log(props)
   useEffect(() => {
 
     let unsubscribeFromAuth = null;
@@ -51,7 +49,7 @@ const App = (props) => {
           })
 
         } else {
-
+          console.log(userAuth)
           //  set current user to null (onAuth will return null if user signs out )
           props.setCurrentUser(userAuth)
         }
@@ -67,7 +65,7 @@ const App = (props) => {
       unsubscribeFromAuth();
     }
 
-  }, [])
+  })
 
 
   return (
@@ -105,7 +103,6 @@ const mapDispatchToProps = (dispatch) => {
 
     // ? Dispatch excecutes action creator function with user argument and returns the action object for dispatch excecution
     setCurrentUser: user => dispatch(setCurrentUser(user))
-
 
   }
 

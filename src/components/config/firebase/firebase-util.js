@@ -31,7 +31,9 @@ export const firestore = firebase.firestore();
 // ? Save a user to DB as document using user data from auth
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 
-    if (!userAuth) return;
+    if (!userAuth) {
+        return
+    };
 
     // ? Get query reference object from FIrebase at locatoion to get snapshot
     const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -42,16 +44,15 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     if (!snapShot.exists) {
 
         // ? Provide user data for the doc from the user provided in argument
-        const { name, email } = userAuth;
+        const { email } = userAuth;
         const createdAt = new Date();
 
         try {
             // ?use document refrence for CRUD operations (create in this case)
             await userRef.set({
-                name,
                 email,
                 createdAt,
-                ...additionalData
+                ...additionalData // name
             });
         } catch (error) {
             console.log('error creating user', error.message);
