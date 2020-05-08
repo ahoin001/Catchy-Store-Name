@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from 'react-redux'
 
 import { setCurrentUser } from "./redux/user/user-actions";
@@ -28,7 +28,7 @@ const App = (props) => {
       // ? onAuthStateChanged will set observer to keep track of user state activity (Listens to any user sign in changes across our firebase project and will update if our user is signed in or signed out)
       // ? It also returns an unsubscribe function that I will use when component unmounts
 
-      // user parameter is given by auth user state
+      // userAuth parameter is given by auth user state
       unsubscribeFromAuth = await auth.onAuthStateChanged(async (userAuth) => {
 
         if (userAuth) {
@@ -38,12 +38,11 @@ const App = (props) => {
           // ? set listener for any changes of data at that ref, and also get the original state of it to set data
           userRef.onSnapshot((snapShot) => {
 
-
             props.setCurrentUser({
 
               id: snapShot.id,
               ...snapShot.data()
-
+          
             })
 
           })
@@ -65,7 +64,7 @@ const App = (props) => {
       unsubscribeFromAuth();
     }
 
-  })
+  },[])
 
 
   return (
@@ -81,8 +80,13 @@ const App = (props) => {
           <HomePage />
         </Route>
 
-        <Route path="/signin">
-          <UserAuth />
+        <Route
+          exact path="/signin"
+          render={() => props.currentUser ?
+            <Redirect to='/' /> :
+            <UserAuth />}
+        >
+
         </Route>
 
         <Route path="/shop">
@@ -96,6 +100,7 @@ const App = (props) => {
   );
 };
 
+
 // ? dispatch function provided by connect
 const mapDispatchToProps = (dispatch) => {
 
@@ -108,5 +113,12 @@ const mapDispatchToProps = (dispatch) => {
 
 }
 
+// Get userReducerState from state with destructure
+const mapStateToProps = ({ user }) => {
 
-export default connect(null, mapDispatchToProps)(App);
+  return { currentUser: user.currentUser }
+
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
