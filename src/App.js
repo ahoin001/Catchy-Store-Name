@@ -19,7 +19,7 @@ const App = (props) => {
 
   // const [currentUser, setCurrentUser] = useState()
   console.log(props)
-  useEffect((props) => {
+  useEffect(() => {
 
     let unsubscribeFromAuth = null;
 
@@ -40,10 +40,11 @@ const App = (props) => {
           // ? set listener for any changes of data at that ref, and also get the original state of it to set data
           userRef.onSnapshot((snapShot) => {
 
-           
+
             props.setCurrentUser({
 
-              id: snapShot.id, ...snapShot.data()
+              id: snapShot.id,
+              ...snapShot.data()
 
             })
 
@@ -55,8 +56,8 @@ const App = (props) => {
           props.setCurrentUser(userAuth)
         }
 
-
       })
+
     }
 
     getUser();
@@ -100,7 +101,6 @@ const App = (props) => {
 // ? dispatch function provided by connect
 const mapDispatchToProps = (dispatch) => {
 
-  // 
   return {
 
     // ? Dispatch excecutes action creator function with user argument and returns the action object for dispatch excecution

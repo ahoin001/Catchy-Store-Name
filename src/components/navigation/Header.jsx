@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link, withRouter } from "react-router-dom";
-
 // HOF that allows component to access redux store and dispatch actions
 import { connect } from "react-redux";
+
+import { auth } from '../config/firebase/firebase-util'
 
 // ? Necesssary naming to import svg file
 import { ReactComponent as Logo } from '../../assets/logo.svg'
 
-import { auth } from '../config/firebase/firebase-util'
 
 import './header-styles.scss'
 
