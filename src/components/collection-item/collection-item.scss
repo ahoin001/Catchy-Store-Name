@@ -1,4 +1,5 @@
 .collection-item {
+  position: relative;
   width: 900px;
   margin-right: 35px;
   flex: 0 0 22%; /* can't grow, can't shrink, fixed at 290px */
@@ -13,6 +14,27 @@
     background-size: cover;
     background-position: center;
     margin-bottom: 5px;
+  }
+
+  // will be referring to CustomButton component class
+  .custom-bttn {
+    display: none;
+
+    width: 80%;
+    opacity: 0.7;
+    position: absolute;
+    top: 255px;
+  }
+
+  &:hover {
+    .collection-item-image {
+      opacity: 0.7;
+    }
+
+    .custom-bttn {
+      display: block;
+      opacity: 0.9;
+    }
   }
 
   .collection-item-footer {
@@ -31,5 +53,4 @@
       width: 10%;
     }
   }
-
 }
