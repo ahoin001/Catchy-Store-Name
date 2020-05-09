@@ -14,12 +14,12 @@ const CollectionPreview = (props) => {
 
             <div className="collection-preview">
 
-                {/* Render 4 menu items from each collection for their preview */}
+                {/* Render 9 menu items from each collection for their preview */}
                 {
-                    props.items.filter((id, index) => index < 9)
-                    .map(({id,...otherItemProps}) => {
-                        return <CollectionItem key={id} {...otherItemProps}/>
-                    })
+                    props.items.filter((element, index) => index < 9)
+                        .map((item) => {
+                            return <CollectionItem key={item.id} item={item} />
+                        })
                 }
 
             </div>

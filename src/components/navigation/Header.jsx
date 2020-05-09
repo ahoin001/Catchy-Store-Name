@@ -10,7 +10,6 @@ import CartIcon from '../cart-icon/cart-icon'
 import CartDropdown from '../cart-dropdown/cart-dropdown';
 
 import './header-styles.scss'
-import cartDropdownReducer from '../../redux/cart-dropdown/cart-dropdown-reducer';
 
 const Header = (props) => {
 
