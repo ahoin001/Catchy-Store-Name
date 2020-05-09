@@ -24,7 +24,7 @@ const CollectionItem = (props) => {
 
             <CustomButton
                 inverted
-                onClick={(e) => {console.log(e.target); props.addItem(props.item)}}
+                onClick={() => { props.addItem(props.item) }}
             >
                 ADD TO CART
             </CustomButton>
