@@ -14,21 +14,19 @@ const CartIcon = (props) => {
         <div
             className="cart-icon"
             onClick={() => props.toggleCartDropDown()}
-            >
-
+        >
 
             <ShoppingCartIcon className="shopping-icon" />
-            <span className="item-count">0</span>
+            <span className="item-count">{props.totalItems}</span>
 
         </div>
     );
-
 
 };
 
 // dispatch provided by connect
 const mapDispatchToProps = dispatch => {
-    
+
     // ? this object will be spread to props
     return {
 
@@ -38,5 +36,15 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
+// ? Deconstruct to get nested property value from state object recieved by connect
+const mapStateToProps = ({ cartDropDown: { cartItems } }) => {
 
-export default connect(null, mapDispatchToProps)(CartIcon);    
+    return {
+        totalItems: cartItems.reduce((accumulator, currentValue) => {
+            return accumulator + currentValue.quantity
+        }, 0)
+    }
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);    

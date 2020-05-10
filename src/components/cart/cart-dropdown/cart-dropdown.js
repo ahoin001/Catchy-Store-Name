@@ -26,9 +26,9 @@ const mapStateToProps = (state) => ({
     cartItems: state.cartDropDown.cartItems
 })
 
-const mapDispatchToProps = (dispatch) => {
+// const mapDispatchToProps = (dispatch) => {
 
-}
+// }
 
 
 
