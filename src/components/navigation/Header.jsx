@@ -6,8 +6,8 @@ import { auth } from '../config/firebase/firebase-util'
 
 // ? Necesssary naming to import svg file
 import { ReactComponent as Logo } from '../../assets/logo.svg'
-import CartIcon from '../cart-icon/cart-icon'
-import CartDropdown from '../cart-dropdown/cart-dropdown';
+import CartIcon from '../cart/cart-icon/cart-icon'
+import CartDropdown from '../cart/cart-dropdown/cart-dropdown';
 
 import './header-styles.scss'
 
