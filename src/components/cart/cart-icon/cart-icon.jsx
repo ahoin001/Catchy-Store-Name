@@ -1,6 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux'
 
+import { connect, useSelector, shallowEqual } from 'react-redux'
+import { getTotalItems } from '../../../redux/cart-dropdown/selectors/cart-items'
 import { toggleCartDisplay } from '../../../redux/cart-dropdown/cart-dropdown-actions'
 
 import { ReactComponent as ShoppingCartIcon } from "../../../assets/shoppingbag.svg";
@@ -9,15 +10,18 @@ import './cart-icon.scss'
 
 const CartIcon = (props) => {
 
+    const totalItems = useSelector((state) => getTotalItems(state))
 
     return (
+
+
         <div
             className="cart-icon"
             onClick={() => props.toggleCartDropDown()}
         >
 
             <ShoppingCartIcon className="shopping-icon" />
-            <span className="item-count">{props.totalItems}</span>
+            <span className="item-count">{totalItems}</span>
 
         </div>
     );
@@ -38,7 +42,7 @@ const mapDispatchToProps = dispatch => {
 
 // ? Deconstruct to get nested property value from state object recieved by connect
 const mapStateToProps = ({ cartDropDown: { cartItems } }) => {
-
+    console.log(`I HAVE BEEN CALLED`)
     return {
         totalItems: cartItems.reduce((accumulator, currentValue) => {
             return accumulator + currentValue.quantity
@@ -46,5 +50,13 @@ const mapStateToProps = ({ cartDropDown: { cartItems } }) => {
     }
 
 }
+
+// const totalItems = useSelector(getTotalItems)
+
+// const totalItems = useSelector(({ cartDropDown: { cartItems } }) => {
+//     cartItems.reduce((accumulator, currentValue) => {
+//         return accumulator + currentValue.quantity
+//     }, 0)
+// })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);    
