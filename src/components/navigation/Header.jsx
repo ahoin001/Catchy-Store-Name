@@ -1,25 +1,40 @@
 import React from 'react';
-import { Link, withRouter } from "react-router-dom";
-// HOF that allows component to access redux store and dispatch actions
-import { connect } from "react-redux";
+
+import { Link } from "react-router-dom";
 import { auth } from '../config/firebase/firebase-util'
+import { useSelector } from 'react-redux'
+
+import { selectCartVisibility } from '../../redux/cart-dropdown/selectors/cart'
+import { selectUserStatus } from '../../redux/user/selectors/user-selectors'
 
 // ? Necesssary naming to import svg file
 import { ReactComponent as Logo } from '../../assets/logo.svg'
+
 import CartIcon from '../cart/cart-icon/cart-icon'
 import CartDropdown from '../cart/cart-dropdown/cart-dropdown';
 
+import lodash from 'lodash'
+
 import './header-styles.scss'
 
-const Header = (props) => {
+const Header = () => {
 
-    // console.log(`PROPS FROM HEADER: `, props)
+    const currentUser = useSelector((state) => selectUserStatus(state), lodash.isEqual)
+
+    // ? When not memoized, this selector will run no matter what dispatch action ocurs
+    // const cartDropdownHidden = useSelector((state) => 
+    // {
+    //  console.log('Cart Visible Selector')   
+    //  return state.cartDropDown.hideCart },lodash.isEqual)
+
+    // ? Reselect(npm) lets us create memoized selectors, so useSelector won't run 
+    // ? unless it's computed output is the same as before the action dispatched
+    // ? (Will still rerender if parent rerenders unless using connect or React.memo)
+    const cartDropdownHidden = useSelector((state) => selectCartVisibility(state), lodash.isEqual)
 
     const signOut = async () => {
-        await auth.signOut()
-            .then(() => props.history.push('/'))
+        await auth.signOut();
     }
-
 
     return (
         <div className="header">
@@ -44,7 +59,7 @@ const Header = (props) => {
 
                 {
 
-                    props.currentUser ?
+                    currentUser ?
                         <div
                             className="link"
                             onClick={signOut}
@@ -63,27 +78,14 @@ const Header = (props) => {
             </div>
 
             {
-                props.cartDropdownHidden ?
+                cartDropdownHidden ?
                     null :
                     <CartDropdown />
             }
-
 
         </div>
     );
 };
 
-// state argument will be supplied by connect (the root reducer in the redux setup)
-// ? this will take currentUser value from state and provide it to this component as a prop
-const mapStateToProps = (state) => (
-
-    // ? This object will be spread to props object and available for connected connected component
-    {
-        currentUser: state.user.currentUser,
-        cartDropdownHidden: state.cartDropDown.hideCart
-    }
-
-)
-
-// Syntax is excecutinng connect, and then passing wrapped header into that retruned function as a argument for use again
-export default connect(mapStateToProps)(withRouter(Header));
+// export default connect()(Header);
+export default Header;

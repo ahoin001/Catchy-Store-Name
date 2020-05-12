@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
-import { connect } from 'react-redux'
+import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux'
 
 import { setCurrentUser } from "./redux/user/user-actions";
 
@@ -16,6 +16,12 @@ import { auth, createUserProfileDocument } from './components/config/firebase/fi
 import './App.css'
 
 const App = (props) => {
+
+  const currentUser = useSelector((state) => {
+    return state.user.currentUser
+  }, shallowEqual)
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
 
@@ -38,19 +44,20 @@ const App = (props) => {
           // ? set listener for any changes of data at that ref, and also get the original state of it to set data
           userRef.onSnapshot((snapShot) => {
 
-            props.setCurrentUser({
+            dispatch(setCurrentUser({
 
               id: snapShot.id,
               ...snapShot.data()
-          
-            })
+
+            }))
 
           })
 
         } else {
           // console.log(userAuth)
           // ? set current user to null (onAuth will return null if user signs out )
-          props.setCurrentUser(userAuth)
+          dispatch(setCurrentUser((userAuth)))
+          // props.setCurrentUser(userAuth)
         }
 
       })
@@ -64,7 +71,7 @@ const App = (props) => {
       unsubscribeFromAuth();
     }
 
-  },[])
+  }, [])
 
 
   return (
@@ -82,7 +89,7 @@ const App = (props) => {
 
         <Route
           exact path="/signin"
-          render={() => props.currentUser ?
+          render={() => currentUser ?
             <Redirect to='/' /> :
             <UserAuth />}
         >
@@ -102,23 +109,23 @@ const App = (props) => {
 
 
 // ? dispatch function provided by connect
-const mapDispatchToProps = (dispatch) => {
+// const mapDispatchToProps = (dispatch) => {
 
-  return {
+//   return {
 
-    // ? Dispatch excecutes action creator function with user argument and returns the action object for dispatch excecution
-    setCurrentUser: user => dispatch(setCurrentUser(user))
+//     // ? Dispatch excecutes action creator function with user argument and returns the action object for dispatch excecution
+//     setCurrentUser: user => dispatch(setCurrentUser(user))
 
-  }
+//   }
 
-}
+// }
 
 // Get userReducerState from state with destructure
-const mapStateToProps = ({ user }) => {
+// const mapStateToProps = ({ user }) => {
 
-  return { currentUser: user.currentUser }
+//   return { currentUser: user.currentUser }
 
-}
+// }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect()(App);

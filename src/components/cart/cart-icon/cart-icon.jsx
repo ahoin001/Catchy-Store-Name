@@ -1,30 +1,23 @@
 import React from 'react';
+import lodash from 'lodash'
 
 import { useSelector, useDispatch } from 'react-redux'
-import { getTotalItems } from '../../../redux/cart-dropdown/selectors/cart-items'
+import { selectCartItemsCount } from '../../../redux/cart-dropdown/selectors/cart'
 import { toggleCartDisplay } from '../../../redux/cart-dropdown/cart-dropdown-actions'
 
 import { ReactComponent as ShoppingCartIcon } from "../../../assets/shoppingbag.svg";
 
 import './cart-icon.scss'
 
-const CartIcon = (props) => {
+const CartIcon = () => {
 
-
-    // ************************************************************
-    // * Started using react-redux hooks instead of connnect
-    // ************************************************************
-
-    const totalItems = useSelector((state) => getTotalItems(state))
+    const totalItems = useSelector((state) => selectCartItemsCount(state), lodash.isEqual)
 
     const dispatch = useDispatch()
 
-
-
-    console.log("Cart Icon rendering. (SHOULD ONLY OCCUR AFTER APP STARTS WHEN ADDING OR REMOVING ITEMS< TANKS TO USESELECTOR");
+    console.log("SnackList rendering");
 
     return (
-
 
         <div
             className="cart-icon"
@@ -39,27 +32,4 @@ const CartIcon = (props) => {
 
 };
 
-// dispatch provided by connect
-// const mapDispatchToProps = dispatch => {
-
-//     // ? this object will be spread to props
-//     return {
-
-//         // ? Dispatch excecutes action creator function with user argument and returns the action object for dispatch excecution
-//         toggleCartDropDown: () => dispatch(toggleCartDisplay())
-
-//     }
-// }
-
-// ? Deconstruct to get nested property value from state object recieved by connect
-// const mapStateToProps = ({ cartDropDown: { cartItems } }) => {
-//     console.log(`I HAVE BEEN CALLED`)
-//     return {
-//         totalItems: cartItems.reduce((accumulator, currentValue) => {
-//             return accumulator + currentValue.quantity
-//         }, 0)
-//     }
-
-// }
-
-export default CartIcon;    
+export default React.memo(CartIcon);    
