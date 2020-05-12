@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { connect, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { selectCartItems } from '../../../redux/cart-dropdown/selectors/cart'
 import CustomButton from "../../shared/button/custom-button";
 import CartItem from "../cart-item/cart-item";
@@ -21,7 +21,6 @@ const CartDropdown = () => {
 
         </div>
     );
-
 
 };
 

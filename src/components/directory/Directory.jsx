@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './directory.styles.scss'
 import MenuItem from '../menu-item/MenuItem';
 
 const Directory = () => {
 
-    const [departments, setdepartments] = useState([
+    const departments = [
         {
             title: 'hats',
             imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
@@ -37,7 +37,7 @@ const Directory = () => {
             id: 5,
             linkUrl: 'shop/mens'
         }
-    ])
+    ]
 
     const menuItems = departments.map(({ id, ...departmentProps }) => {
 

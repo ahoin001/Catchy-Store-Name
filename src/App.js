@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
-import { connect, useSelector, shallowEqual, useDispatch } from 'react-redux'
+import { connect, useSelector, useDispatch } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import lodash from 'lodash'
 
 import { setCurrentUser } from "./redux/user/user-actions";
-
+import { selectUserStatus } from './redux/user/selectors/user-selectors'
 
 import HomePage from "./pages/homepage/HomePage";
 import Shop from './pages/shop/Shop';
@@ -15,11 +17,17 @@ import { auth, createUserProfileDocument } from './components/config/firebase/fi
 
 import './App.css'
 
-const App = (props) => {
+const App = () => {
 
-  const currentUser = useSelector((state) => {
-    return state.user.currentUser
-  }, shallowEqual)
+  // const currentUser = useSelector((state) => {
+  //   return state.user.currentUser
+  // }, shallowEqual)
+
+  const structuredSelector = createStructuredSelector({
+    currentUser: (state) => selectUserStatus(state)
+  })
+
+  const {currentUser} = useSelector(structuredSelector,lodash.isEqual)
 
   const dispatch = useDispatch()
 
