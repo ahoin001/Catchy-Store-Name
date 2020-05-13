@@ -10,6 +10,7 @@ import { selectUserStatus } from './redux/user/selectors/user-selectors'
 import HomePage from "./pages/homepage/HomePage";
 import Shop from './pages/shop/Shop';
 import UserAuth from './pages/user-handling/User-Auth';
+import Checkout from './pages/checkout/checkout'
 
 import Header from './components/navigation/Header';
 import { auth, createUserProfileDocument } from './components/config/firebase/firebase-util'
@@ -27,7 +28,7 @@ const App = () => {
     currentUser: (state) => selectUserStatus(state)
   })
 
-  const {currentUser} = useSelector(structuredSelector,lodash.isEqual)
+  const { currentUser } = useSelector(structuredSelector, lodash.isEqual)
 
   const dispatch = useDispatch()
 
@@ -42,7 +43,7 @@ const App = () => {
       // ? onAuthStateChanged will set observer to keep track of user state activity (Listens to any user sign in changes across our firebase project and will update if our user is signed in or signed out)
       // ? It also returns an unsubscribe function that I will use when component unmounts
 
-      // userAuth parameter is given by auth user state
+      // userAuth argument is given by onauth user state
       unsubscribeFromAuth = await auth.onAuthStateChanged(async (userAuth) => {
 
         if (userAuth) {
@@ -101,11 +102,17 @@ const App = () => {
             <Redirect to='/' /> :
             <UserAuth />}
         >
-
         </Route>
 
         <Route path="/shop">
           <Shop />
+        </Route>
+
+        <Route
+          exact path="/checkout"
+          component={Checkout}
+        >
+
         </Route>
 
       </Switch>
