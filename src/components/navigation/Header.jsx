@@ -32,7 +32,7 @@ const Header = () => {
     // ? (Will still rerender if parent rerenders unless using connect or React.memo)
     // const cartDropdownHidden = useSelector((state) => selectCartVisibility(state), lodash.isEqual)
 
-    // ? Structured selector makes it easier to add selectors
+    // ? Structured selector makes it easier to add and use multiple selectors
     const structuredSelector = createStructuredSelector({
         currentUser: (state) => selectUserStatus(state),
         cartDropdownHidden: (state) => selectCartVisibility(state)
