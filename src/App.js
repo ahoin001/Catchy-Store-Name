@@ -66,7 +66,6 @@ const App = () => {
           // console.log(userAuth)
           // ? set current user to null (onAuth will return null if user signs out )
           dispatch(setCurrentUser((userAuth)))
-          // props.setCurrentUser(userAuth)
         }
 
       })
