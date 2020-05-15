@@ -1,29 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, } from "react-router-dom";
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/integration/react'
+
+// ? Redux Provider passes access to store and reducers to rest of application
+import { store, persistor } from './redux/store'
+
+
 import './index.css';
 import App from './App';
 
-// ? Redux Provider passes access to store and reducers to rest of application
-import { Provider } from 'react-redux'
-import store from './redux/store'
-
-import { BrowserRouter as Router, } from "react-router-dom";
-
 ReactDOM.render(
-  // <React.StrictMode>
+  <React.StrictMode>
 
     <Provider store={store}>
 
       <Router>
 
-        <App/>
+        {/*  */}
+        <PersistGate persistor={persistor}>
+
+          <App />
+
+        </PersistGate>
 
       </Router>
 
     </Provider>
 
 
-  // </React.StrictMode>
+  </React.StrictMode>
   ,
   document.getElementById('root')
 );
