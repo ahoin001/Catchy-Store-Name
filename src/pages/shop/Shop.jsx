@@ -1,26 +1,25 @@
 import React from 'react';
-import CollectionPreview from '../../components/collection-preview/CollectionPreview';
-import SHOP_COLLLECTION from './staticData'
+import { Route } from 'react-router-dom'
+
+import CollectionPage from '../collection/collection'
+import CollectionsOverview from '../../components/collections-overview/collections-overview';
+
 
 import './shop.scss'
 
-const Shop = () => {
+// ? Shop component is nested in a route (check App.js) Route passes map, location and history props
+const Shop = ({ match }) => {
 
-    const itemCollections = SHOP_COLLLECTION
-
-    const collections = [...itemCollections]
+    // console.log(`MATCH PROP = `, match)
 
     return (
 
         <div className={'shop-page'}>
+            
+            {/* Match will be current nested components route, so /shop */}
+            <Route exact path={`${match.path}`} component={CollectionsOverview} />
 
-            {
-
-                collections.map(({ id, ...otherCollectionProps }) => {
-                    return <CollectionPreview key={id} {...otherCollectionProps} />
-                })
-
-            }
+            <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
 
         </div>
     );

@@ -14,6 +14,7 @@ import App from './App';
 ReactDOM.render(
   <React.StrictMode>
 
+    {/* Allows react-redux hooks to access store and dispatch actions */}
     <Provider store={store}>
 
       <Router>

@@ -91,8 +91,11 @@ const App = () => {
 
       <Switch>
 
-        <Route exact path="/">
-          <HomePage />
+        <Route
+          exact path="/"
+          component={HomePage}
+        >
+
         </Route>
 
         <Route
@@ -103,8 +106,11 @@ const App = () => {
         >
         </Route>
 
-        <Route path="/shop">
-          <Shop />
+        <Route
+          path="/shop"
+          component={Shop}
+        >
+
         </Route>
 
         <Route
