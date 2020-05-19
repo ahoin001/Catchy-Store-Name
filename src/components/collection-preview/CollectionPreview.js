@@ -6,6 +6,7 @@ import './collection-preview.scss'
 
 const CollectionPreview = (props) => {
 
+    // console.log(`PROPS IM LOOGIN FOR &&&&&&&&`,props)
 
     return (
         <div className="collection-preview-container">
@@ -16,7 +17,7 @@ const CollectionPreview = (props) => {
 
                 {/* Render 9 menu items from each collection for their preview */}
                 {
-                    props.items.filter((element, index) => index < 9)
+                    props.items.filter((element, index) => index < 4)
                         .map((item) => {
                             return <CollectionItem key={item.id} item={item} />
                         })

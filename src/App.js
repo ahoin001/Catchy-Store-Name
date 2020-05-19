@@ -20,10 +20,6 @@ import './App.css'
 
 const App = () => {
 
-  // const currentUser = useSelector((state) => {
-  //   return state.user.currentUser
-  // }, shallowEqual)
-
   const structuredSelector = createStructuredSelector({
     currentUser: (state) => selectUserStatus(state)
   })
@@ -126,26 +122,5 @@ const App = () => {
 
   );
 };
-
-
-// ? dispatch function provided by connect
-// const mapDispatchToProps = (dispatch) => {
-
-//   return {
-
-//     // ? Dispatch excecutes action creator function with user argument and returns the action object for dispatch excecution
-//     setCurrentUser: user => dispatch(setCurrentUser(user))
-
-//   }
-
-// }
-
-// Get userReducerState from state with destructure
-// const mapStateToProps = ({ user }) => {
-
-//   return { currentUser: user.currentUser }
-
-// }
-
 
 export default connect()(App);

@@ -15,7 +15,7 @@ const Shop = ({ match }) => {
     return (
 
         <div className={'shop-page'}>
-            
+
             {/* Match will be current nested components route, so /shop */}
             <Route exact path={`${match.path}`} component={CollectionsOverview} />
 
