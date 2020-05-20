@@ -6,7 +6,8 @@ import rootReducer from "./root-reducer";
 
 const middleWares = [];
 
-// ? env variable accessible by create react app,
+// ? env variable accessible by create react app, tells what stage app is in (production or development)
+// ? When project is 'npm build' , this variable wwill be production
 if (process.env.NODE_ENV === 'development') {
     middleWares.push(logger)
 }
