@@ -5,9 +5,9 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectCartItemsCount } from '../../../redux/cart-dropdown/selectors/cart'
 import { toggleCartDisplay } from '../../../redux/cart-dropdown/cart-dropdown-actions'
 
-import { ReactComponent as ShoppingCartIcon } from "../../../assets/shoppingbag.svg";
+import { CartIconContainer } from "./cart-icon-styles";
 
-import './cart-icon.scss'
+import { ReactComponent as ShoppingCartIcon } from "../../../assets/shoppingbag.svg";
 
 const CartIcon = () => {
 
@@ -15,19 +15,18 @@ const CartIcon = () => {
 
     const dispatch = useDispatch()
 
-    console.log("SnackList rendering");
+    console.log("Cart Icon &/or List rendering");
 
     return (
 
-        <div
-            className="cart-icon"
+        <CartIconContainer
             onClick={() => dispatch(toggleCartDisplay())}
         >
 
             <ShoppingCartIcon className="shopping-icon" />
             <span className="item-count">{totalItems}</span>
 
-        </div>
+        </CartIconContainer>
     );
 
 };

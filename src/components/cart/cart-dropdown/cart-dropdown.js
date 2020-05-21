@@ -5,10 +5,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectCartItems } from '../../../redux/cart-dropdown/selectors/cart'
 import { toggleCartDisplay } from '../../../redux/cart-dropdown/cart-dropdown-actions'
 
-import CustomButton from "../../shared/button/custom-button";
-import CartItem from "../cart-item/cart-item";
+import { 
+    CartDropDownContainer, 
+    CartItemsContainer, 
+    EmptyMessageContainer, 
+    CartDropdownButton } 
+    from './cart-dropdown-styles'
 
-import './cart-dropdown.scss'
+import CartItem from "../cart-item/cart-item";
 
 // ? Extract history from props
 const CartDropdown = ({ history }) => {
@@ -22,20 +26,18 @@ const CartDropdown = ({ history }) => {
     )
 
     return (
-        <div className="cart-dropdown">
+        <CartDropDownContainer>
 
-            <div className="cart-items">
+            <CartItemsContainer>
 
                 {cartItems.length ?
                     cartItems.map((item) => <CartItem key={item.id} item={item} />) :
-                    <span className="empty-message"> Your Cart is empty</span>
+                    <EmptyMessageContainer> Your Cart is empty</EmptyMessageContainer>
                 }
 
-                {/* {cartItems.map((item) => <CartItem key={item.id} item={item} />)} */}
+            </CartItemsContainer>
 
-            </div>
-
-            <CustomButton 
+            <CartDropdownButton 
             onClick={() => {
                 history.push('/checkout')
                 toggleDropDown()
@@ -44,9 +46,9 @@ const CartDropdown = ({ history }) => {
             
             GO TO CHECKOUT
             
-            </CustomButton>
+            </CartDropdownButton>
 
-        </div>
+        </CartDropDownContainer>
     );
 
 };
