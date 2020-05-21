@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { Link } from "react-router-dom";
 import { auth } from '../config/firebase/firebase-util'
 import { useSelector } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { selectCartVisibility } from '../../redux/cart-dropdown/selectors/cart'
 import { selectUserStatus } from '../../redux/user/selectors/user-selectors'
+
+import { HeaderContainer, LogoContainer, NavLinksContainer, StyledLink } from './header-styles'
 
 // ? Necesssary naming to import svg file
 import { ReactComponent as Logo } from '../../assets/logo.svg'
@@ -15,7 +16,7 @@ import CartDropdown from '../cart/cart-dropdown/cart-dropdown';
 
 import lodash from 'lodash'
 
-import './header-styles.scss'
+// import './header-styles.scss'
 
 const Header = () => {
 
@@ -45,45 +46,46 @@ const Header = () => {
     }
 
     return (
-        <div className="header">
+        <HeaderContainer>
 
-            <Link
+            <LogoContainer
                 className="logo-container"
                 to="/"
             >
                 <Logo className="logo" />
 
-            </Link>
+            </LogoContainer>
 
-            <div className="nav-links">
+            <NavLinksContainer>
 
-                <Link className="link" to="/shop">
+                <StyledLink className="link" to="/shop">
                     SHOP
-                </Link>
+                </StyledLink>
 
-                <Link className="link" to="/">
+                <StyledLink className="link" to="/">
                     Contact
-                </Link>
+                </StyledLink>
 
                 {
 
                     currentUser ?
-                        <div
+                        <StyledLink
+                            as='div' // Replace styled component with new element, can be component
                             className="link"
                             onClick={signOut}
                         >
                             SIGN OUT
-                        </div>
+                        </StyledLink>
                         :
-                        <Link className="link" to="/signin">
+                        <StyledLink className="link" to="/signin">
                             SIGN IN
-                        </Link>
+                        </StyledLink>
 
                 }
 
                 <CartIcon />
 
-            </div>
+            </NavLinksContainer>
 
             {
                 cartDropdownHidden ?
@@ -91,7 +93,7 @@ const Header = () => {
                     <CartDropdown />
             }
 
-        </div>
+        </HeaderContainer>
     );
 };
 
