@@ -36,11 +36,13 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     };
 
     // ? Get query reference object from FIrebase at locatoion to get snapshot
+    // ? Reference will ALWAYS return something even if nothing exsists, use snap to make sure something exsists 
     const userRef = firestore.doc(`users/${userAuth.uid}`);
+    console.log(`&&&&&&&&&&&:`,userRef)
     const snapShot = await userRef.get();
 
 
-    // ? Check if anything exsists in this location, create a document if not
+    // ? Use snapshot to check if anything exsists in this location, create a document if not
     if (!snapShot.exists) {
 
         // ? Provide user data for the doc from the user provided in argument
@@ -48,7 +50,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
         const createdAt = new Date();
 
         try {
-            // ?use document refrence for CRUD operations (create in this case)
+            // ? Use document refrence for CRUD operations (create in this case)
             await userRef.set({
                 email,
                 createdAt,
