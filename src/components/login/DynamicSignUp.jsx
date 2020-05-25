@@ -16,11 +16,6 @@ const Login = () => {
 
         const { name, email, password } = userInput
 
-        // if (password !== confirmPassword) {
-        //     alert('Passwords do not match')
-        //     return;
-        // }
-
         try {
 
             // ? Creates user and signs user in, returns object with user key to get user data

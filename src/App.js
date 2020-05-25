@@ -16,6 +16,7 @@ import Header from './components/navigation/Header';
 import { auth, createUserProfileDocument } from './components/config/firebase/firebase-util'
 
 
+
 import './App.css'
 
 const App = () => {
@@ -46,7 +47,7 @@ const App = () => {
 
           const userRef = await createUserProfileDocument(userAuth)
 
-          // ? set listener for any changes of data at that ref, and also get the original state of it to set data
+          // ? set listener for any changes of data at that ref, and also first gets the original state of it to set data
           userRef.onSnapshot((snapShot) => {
 
             dispatch(setCurrentUser({
@@ -57,6 +58,8 @@ const App = () => {
             }))
 
           })
+
+
 
         } else {
           // console.log(userAuth)

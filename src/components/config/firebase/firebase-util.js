@@ -17,14 +17,14 @@ const firebaseConfig = {
     measurementId: "G-P2DZVE7MP2"
 };
 
-// ?Initialize our instance of Firebase
+// ? Initialize our instance of Firebase
 firebase.initializeApp(firebaseConfig);
 
 // ? Export Libraries for use
 export const auth = firebase.auth()
 export const firestore = firebase.firestore();
 
-// ? Both retrieve the same doc 
+// ? Both point to same doc location
 // firestore.collection('users'.doc('someDocumentId'))
 // firestore.doc('/users/someDocumentId/')
 
@@ -38,7 +38,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     // ? Get query reference object from FIrebase at locatoion to get snapshot
     // ? Reference will ALWAYS return something even if nothing exsists, use snap to make sure something exsists 
     const userRef = firestore.doc(`users/${userAuth.uid}`);
-    console.log(`&&&&&&&&&&&:`,userRef)
+
     const snapShot = await userRef.get();
 
 
@@ -96,6 +96,50 @@ export const signOut = () => {
         }).catch(function (error) {
             // An error happened.
         });
+}
+
+export const convertCollectionSnapShotToMap = (collectionSnapshotObject) => {
+
+    const collectionAsArray = collectionSnapshotObject.docs.map((document) => {
+
+        // ? Extract data from document
+        const { title, items } = document.data();
+        // console.log( document.data())
+
+        // Return Data from document after adding route and id of object 
+        return {
+            routeName: encodeURI(title.toLowerCase()),
+            id: document.id,
+            title,
+            items
+        }
+
+    })
+
+    console.log('COLLECTION FROM FIREBASE AS ARRAY: ',collectionAsArray)
+
+}
+
+
+
+export const addCollectionAndDocumentss = async (collectionKey, objectsToAdd) => {
+    const collectionRef = firestore.collection(collectionKey)
+
+    // Create Batch instance
+    const batch = firestore.batch();
+
+    objectsToAdd.forEach(obj => {
+
+        // ? Create new docReference Objects for each key in object (Creates UniqueId if doc() empty)
+        const newDocRef = collectionRef.doc()
+
+        // ? batch all set operations that will be done on eaach key
+        batch.set(newDocRef, obj)
+
+    })
+
+    await batch.commit()
+
 }
 
 export default firebase

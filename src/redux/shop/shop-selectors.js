@@ -10,16 +10,7 @@ export const selectShopCollections = createSelector(
     }
 )
 
-// Converts object of collectinos into an array
-export const selectCollectionsForPreview = createSelector(
-    [selectShopCollections],
-    (collections) => {
-        console.log(`SELECTING SHOP HOPEFULY :`,collections)
-        console.log(`shopCollections collections into an array selector: `, Object.keys(collections).map(key => collections[key]));
-        return Object.keys(collections).map(key => collections[key])
-    }
-)
-
+// ? USES THE HASH MAP
 export const selectStoreCollection = (collectionUrlParam) =>
     createSelector(
         [selectShopCollections],
@@ -29,3 +20,15 @@ export const selectStoreCollection = (collectionUrlParam) =>
         }
 
     )
+
+// Converts object(HASHMAP) of collectinos into an array (for .map used in project)
+export const selectCollectionsForPreview = createSelector(
+    [selectShopCollections],
+    (collections) => {
+        console.log(`SELECTING SHOP HOPEFULY :`,collections)
+        console.log(`shopCollections collections into an array selector: `, Object.keys(collections).map(key => collections[key]));
+        return Object.keys(collections).map(key => collections[key])
+    }
+)
+
+
