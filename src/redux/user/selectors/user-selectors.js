@@ -9,7 +9,7 @@ const selectCurrentUser = state => state.user;
 export const selectUserStatus = createSelector(
     [selectCurrentUser], 
     (selectCurrentUser) => {
-        console.log(`User Status selector:`,selectCurrentUser.currentUser)
+        // console.log(`User Status selector:`,selectCurrentUser.currentUser)
         return selectCurrentUser.currentUser
     }
 )

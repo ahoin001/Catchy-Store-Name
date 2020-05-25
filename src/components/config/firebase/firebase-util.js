@@ -98,16 +98,19 @@ export const signOut = () => {
         });
 }
 
+// ? Convert a collection to hash map
 export const convertCollectionSnapShotToMap = (collectionSnapshotObject) => {
 
-    const collectionAsArray = collectionSnapshotObject.docs.map((document) => {
+    // ? Maps over array of docs in collection snapshot and returns object with desired data for use
+    const transformedCollection = collectionSnapshotObject.docs.map((document) => {
 
         // ? Extract data from document
         const { title, items } = document.data();
         // console.log( document.data())
 
-        // Return Data from document after adding route and id of object 
+        // ? Return Data from document after adding route and id of object 
         return {
+            // ? encode for routes
             routeName: encodeURI(title.toLowerCase()),
             id: document.id,
             title,
@@ -116,10 +119,19 @@ export const convertCollectionSnapShotToMap = (collectionSnapshotObject) => {
 
     })
 
-    console.log('COLLECTION FROM FIREBASE AS ARRAY: ',collectionAsArray)
+    // console.log('COLLECTION FROM FIREBASE AS ARRAY: ',transformedCollection)
+
+    // ? Returns hash map from array of documents ex. {hats: {hatsCollectionobject} }
+    return transformedCollection.reduce((accumulator, collection) => {
+
+        accumulator[collection.title.toLowerCase()] = collection;
+        // console.log(`ACCUMULATOR ******** `,accumulator)
+        return accumulator;
+
+    }, {}
+    )
 
 }
-
 
 
 export const addCollectionAndDocumentss = async (collectionKey, objectsToAdd) => {

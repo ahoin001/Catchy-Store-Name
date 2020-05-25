@@ -15,7 +15,7 @@ const CartIcon = () => {
 
     const dispatch = useDispatch()
 
-    console.log("Cart Icon &/or List rendering");
+    // console.log("Cart Icon &/or List rendering");
 
     return (
 
