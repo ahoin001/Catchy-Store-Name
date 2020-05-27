@@ -32,6 +32,7 @@ const App = () => {
   useEffect(() => {
 
     let unsubscribeFromAuth = null;
+    let unsubscribeFromSnapShot = null;
 
     const getUser = async () => {
 
@@ -48,7 +49,7 @@ const App = () => {
           const userRef = await createUserProfileDocument(userAuth)
 
           // ? set listener for any changes of data at that ref, and also first gets the original state of it to set data
-          userRef.onSnapshot((snapShot) => {
+          unsubscribeFromSnapShot = userRef.onSnapshot((snapShot) => {
 
             dispatch(setCurrentUser({
 
@@ -76,6 +77,7 @@ const App = () => {
     // ? unsub when component unmounts
     return () => {
       unsubscribeFromAuth();
+      unsubscribeFromSnapShot();
     }
 
   }, [])

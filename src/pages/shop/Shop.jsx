@@ -27,28 +27,44 @@ const Shop = ({ match }) => {
         [dispatch]
     )
 
+    // ? Hit Firebase to make sure Firebase Collection gives us most recent store collection inventory 
     useEffect(() => {
+
+        let unsubscribeFromSnapShot;
 
         const getShopData = () => {
 
-            let unsubscribeFromSnapShot = null;
+            unsubscribeFromSnapShot = null;
 
             const collectionRef = firestore.collection('collections')
 
-            // ? Whenever collection updates or is initialized , return snapshot object of collectionRef
-            unsubscribeFromSnapShot = collectionRef.onSnapshot(async snapshot => {
+            collectionRef.get()
+                .then(snapshot => {
+                    const collectionsMap = convertCollectionSnapShotToMap(snapshot)
+                    updateCollectionsAction(collectionsMap)
+                    setdisplayLoaingSpinner(false)
+                })
 
-                const collectionsMap = convertCollectionSnapShotToMap(snapshot)
-                // console.log('MAPPED OBJECT %%%%%%%%',collectionsMap)
-                updateCollectionsAction(collectionsMap)
-                setdisplayLoaingSpinner(false)
-            })
+            // ? Whenever collection updates or is initialized , return snapshot object of collectionRef
+            // unsubscribeFromSnapShot = collectionRef.onSnapshot(async snapshot => {
+
+            //     const collectionsMap = convertCollectionSnapShotToMap(snapshot)
+            //     // console.log('MAPPED OBJECT %%%%%%%%',collectionsMap)
+            //     updateCollectionsAction(collectionsMap)
+            //     setdisplayLoaingSpinner(false)
+            // })
 
         }
 
         getShopData();
 
+        // return () => {
+        //     unsubscribeFromSnapShot()
+        // }
+
     }, [])
+
+
 
     return (
 
