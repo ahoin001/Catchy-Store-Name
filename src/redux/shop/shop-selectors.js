@@ -21,15 +21,22 @@ export const selectCollectionsForPreview = createSelector(
 )
 
 // ? USES THE HASH MAP
-export const selectStoreCollection = (collectionUrlParam) =>
-    createSelector(
-        [selectShopCollections],
-        shopCollection => {
-            // console.log(`shop specific collection selector: `, shopCollection[collectionUrlParam])
-            return shopCollection ? shopCollection[collectionUrlParam] : null
-        }
+export const selectStoreCollection = (collectionUrlParam) => createSelector(
+    [selectShopCollections],
+    shopCollection => {
+        // console.log(`shop specific collection selector: `, shopCollection[collectionUrlParam])
+        return shopCollection ? shopCollection[collectionUrlParam] : null
+    }
 
-    )
+)
+
+export const selectCollectionsIsFetching = () => createSelector(
+    [selectShop],
+    (shop) => {
+        console.log(`shop fetching selector: `, shop)
+        return shop.isFetching
+    }
+)
 
 
 

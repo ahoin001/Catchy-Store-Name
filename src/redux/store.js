@@ -1,10 +1,11 @@
 import { createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
 import { persistStore } from 'redux-persist'
+import thunk from 'redux-thunk'
 
 import rootReducer from "./root-reducer";
 
-const middleWares = [];
+const middleWares = [thunk];
 
 // ? env variable accessible by create react app, tells what stage app is in (production or development)
 // ? When project is 'npm build' , this variable wwill be production
