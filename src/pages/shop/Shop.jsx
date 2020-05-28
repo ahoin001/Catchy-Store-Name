@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 import { fetchCollectionsStartAsync } from '../../redux/shop/shop-actions'
-import { selectCollectionsIsFetching } from '../../redux/shop/shop-selectors'
+import { selectIsFetchingCollections } from '../../redux/shop/shop-selectors'
 
 import WithSpinner from '../../components/with-spinner/with-spinner'
 
@@ -22,11 +22,10 @@ const Shop = ({ match }) => {
 
     // ? Structured selector makes it easier to add and use multiple selectors
     const structuredSelector = createStructuredSelector({
-        isFetchingCollections: (state) => selectCollectionsIsFetching(state)
+        isFetchingCollections: (state) => selectIsFetchingCollections(state)
     })
 
     const { isFetchingCollections } = useSelector(structuredSelector);
-    // console.log(`@@@@@@@@@@@@@@`,isFetchingCollections)
 
     const dispatch = useDispatch();
 
@@ -43,7 +42,7 @@ const Shop = ({ match }) => {
         const getShopData = () => {
 
             fetchCollectionsAsyncAction()
-            
+
         }
 
         getShopData();

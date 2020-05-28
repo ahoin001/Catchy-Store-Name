@@ -1,12 +1,20 @@
 import { createSelector } from 'reselect'
 
-const selectShop = state => state.shop;
+export const selectShop = state => state.shop;
 
 export const selectShopCollections = createSelector(
     [selectShop],
     (shop) => {
         console.log(`shop collections selector: `, shop.collections)
         return shop.collections
+    }
+)
+
+export const selectIsFetchingCollections = createSelector(
+    [selectShop],
+    (shopState) => {
+        // console.log(`shop is fetching boolean selector: `, shopState.isFetching)
+        return shopState.isFetching
     }
 )
 
@@ -29,15 +37,3 @@ export const selectStoreCollection = (collectionUrlParam) => createSelector(
     }
 
 )
-
-export const selectCollectionsIsFetching = () => createSelector(
-    [selectShop],
-    (shop) => {
-        console.log(`shop fetching selector: `, shop)
-        return shop.isFetching
-    }
-)
-
-
-
-

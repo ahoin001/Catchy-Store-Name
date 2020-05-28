@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect'
 import lodash from 'lodash'
 
 import { setCurrentUser } from "./redux/user/user-actions";
+import { selectShop } from "./redux/shop/shop-selectors";
 import { selectUserStatus } from './redux/user/selectors/user-selectors'
 
 import HomePage from "./pages/homepage/HomePage";
@@ -15,17 +16,17 @@ import Checkout from './pages/checkout/checkout'
 import Header from './components/navigation/Header';
 import { auth, createUserProfileDocument } from './components/config/firebase/firebase-util'
 
-
-
 import './App.css'
 
 const App = () => {
 
   const structuredSelector = createStructuredSelector({
-    currentUser: (state) => selectUserStatus(state)
+    currentUser: (state) => selectUserStatus(state),
+    shop: (state) => selectShop(state)
   })
 
   const { currentUser } = useSelector(structuredSelector, lodash.isEqual)
+  // console.log(`!!!!!!!!!!!!!!!!!!!!!! : `,shop)
 
   const dispatch = useDispatch()
 
