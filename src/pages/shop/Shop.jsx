@@ -1,31 +1,17 @@
 import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { useDispatch } from 'react-redux'
 
 import { fetchCollectionsStartAsync } from '../../redux/shop/shop-actions'
-import { selectIsFetchingCollections } from '../../redux/shop/shop-selectors'
 
-import WithSpinner from '../../components/with-spinner/with-spinner'
-
-import CollectionPage from '../collection/collection'
-import CollectionsOverview from '../../components/collections-overview/collections-overview';
+// ? Container logic handles components deciding whether they will render or load themselves
+import CollectionPageContainer from '../collection/collection-container'
+import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview-container';
 
 import './shop.scss'
 
-// ? Give components loading screens using HOC
-const CollectionOverviewWithSpinner = WithSpinner(CollectionsOverview);
-const CollectionPageWithSpinner = WithSpinner(CollectionPage);
-
 // ? Shop component is nested in a route (check App.js) Route passes map, location and history props
 const Shop = ({ match }) => {
-
-    // ? Structured selector makes it easier to add and use multiple selectors
-    const structuredSelector = createStructuredSelector({
-        isFetchingCollections: (state) => selectIsFetchingCollections(state)
-    })
-
-    const { isFetchingCollections } = useSelector(structuredSelector);
 
     const dispatch = useDispatch();
 
@@ -34,9 +20,7 @@ const Shop = ({ match }) => {
         [dispatch]
     )
 
-
-
-    // ? Hit Firebase when component mounts to make sure Firebase Collection gives us most recent store collections 
+    // ? Async actions to firebase to get store data
     useEffect(() => {
 
         const getShopData = () => {
@@ -50,27 +34,25 @@ const Shop = ({ match }) => {
     }, [])
 
 
-
     return (
 
         <div className={'shop-page'}>
 
             {/* Match path will be current nested components route, so /shop */}
-            {/* Render accepts function that I use to pass props and a component */}
             <Route
                 exact
                 path={`${match.path}`}
-                render={(props) => <CollectionOverviewWithSpinner isLoading={isFetchingCollections} {...props} />}
+                component={CollectionsOverviewContainer}
+
             />
 
             <Route
                 path={`${match.path}/:collectionId`}
-                render={(props) => <CollectionPageWithSpinner isLoading={isFetchingCollections} {...props} />}
+                component={CollectionPageContainer}
             />
 
         </div>
     );
-
 
 };
 

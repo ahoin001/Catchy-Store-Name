@@ -18,11 +18,18 @@ export const selectIsFetchingCollections = createSelector(
     }
 )
 
+export const selectIsCollectionsLoaded = createSelector(
+    [selectShop],
+    (shopState) => {
+        return !!shopState.collections
+    }
+)
+
 // ? Converts object(HASHMAP) of collectinos into an array (for .map used in project)
 export const selectCollectionsForPreview = createSelector(
     [selectShopCollections],
     (collections) => {
-        // console.log(`SELECTING SHOP HOPEFULY :`,collections)
+        // console.log(`SELECTING SHOP Collections :`,collections)
         // console.log(`shopCollections collections into an array selector: `, Object.keys(collections).map(key => collections[key]));
         return collections ? Object.keys(collections).map(key => collections[key]) : []
     }
