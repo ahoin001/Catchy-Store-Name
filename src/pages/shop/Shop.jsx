@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { fetchCollectionsStartAsync } from '../../redux/shop/shop-actions'
+import { fetchCollectionsStart } from '../../redux/shop/shop-actions'
 
 // ? Container logic handles components deciding whether they will render or load themselves
 import CollectionPageContainer from '../collection/collection-container'
@@ -16,7 +16,7 @@ const Shop = ({ match }) => {
     const dispatch = useDispatch();
 
     const fetchCollectionsAsyncAction = React.useCallback(
-        () => dispatch(fetchCollectionsStartAsync()),
+        () => dispatch(fetchCollectionsStart()),
         [dispatch]
     )
 
