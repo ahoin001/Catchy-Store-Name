@@ -3,8 +3,8 @@ import logger from "redux-logger";
 import createSagaMiddleWare from 'redux-saga'
 import { persistStore } from 'redux-persist'
 
-import { fetchCollectionStart } from './shop/shop-sagas'
 import rootReducer from "./root-reducer";
+import { rootSaga } from './root-saga/root-saga'
 
 const sagaMiddleWare = createSagaMiddleWare()
 
@@ -20,7 +20,9 @@ if (process.env.NODE_ENV === 'development') {
 // Its API is { subscribe, dispatch, getState }
 export const store = createStore(rootReducer, applyMiddleware(...middleWares))
 
-sagaMiddleWare.run(fetchCollectionStart)
+
+// ? RootSaga holds all sagas we want to listen for, same as rootReducer
+sagaMiddleWare.run(rootSaga)
 
 
 export const persistor = persistStore(store)
