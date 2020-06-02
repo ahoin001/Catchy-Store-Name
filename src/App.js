@@ -21,12 +21,11 @@ import './App.css'
 const App = () => {
 
   const structuredSelector = createStructuredSelector({
-    currentUser: (state) => selectUserStatus(state),
-    shop: (state) => selectShop(state)
+    currentUser: (state) => selectUserStatus(state)
+    // shop: (state) => selectShop(state)
   })
 
   const { currentUser } = useSelector(structuredSelector, lodash.isEqual)
-  // console.log(`!!!!!!!!!!!!!!!!!!!!!! : `,shop)
 
   const dispatch = useDispatch()
 
@@ -43,33 +42,31 @@ const App = () => {
       // ? It also returns an unsubscribe function that I will use when component unmounts
 
       // userAuth argument is given by onauth user state
-      unsubscribeFromAuth = await auth.onAuthStateChanged(async (userAuth) => {
+      // unsubscribeFromAuth = await auth.onAuthStateChanged(async (userAuth) => {
 
-        if (userAuth) {
+      //   if (userAuth) {
 
-          const userRef = await createUserProfileDocument(userAuth)
+      //     const userRef = await createUserProfileDocument(userAuth)
 
-          // ? set listener for any changes of data at that ref, and also first gets the original state of it to set data
-          unsubscribeFromSnapShot = userRef.onSnapshot((snapShot) => {
+      //     // ? set listener for any changes of data at that ref, and also first gets the original state of it to set data
+      //     unsubscribeFromSnapShot = userRef.onSnapshot((snapShot) => {
 
-            dispatch(setCurrentUser({
+      //       dispatch(setCurrentUser({
 
-              id: snapShot.id,
-              ...snapShot.data()
+      //         id: snapShot.id,
+      //         ...snapShot.data()
 
-            }))
+      //       }))
 
-          })
+      //     })
 
+      //   } else {
+      //     // console.log(userAuth)
+      //     // ? set current user to null (onAuth will return null if user signs out )
+      //     dispatch(setCurrentUser((userAuth)))
+      //   }
 
-
-        } else {
-          // console.log(userAuth)
-          // ? set current user to null (onAuth will return null if user signs out )
-          dispatch(setCurrentUser((userAuth)))
-        }
-
-      })
+      // })
 
     }
 

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import FormInput from '../shared/forminput/FormInput'
+import { useDispatch } from 'react-redux'
+
+import { googleSignInStart } from '../../redux/user/user-actions'
+
 import { googleSignIn, auth } from '../config/firebase/firebase-util'
+import FormInput from '../shared/forminput/FormInput'
 
 import './dynamic.scss'
 import '../shared/button/google-button.scss'
@@ -9,11 +13,11 @@ const Login = () => {
 
     const [userInput, setuserInput] = useState({ email: '', password: '' })
 
+    const dispatch = useDispatch()
 
     const handleSignIn = async (event) => {
 
         event.preventDefault();
-
 
         try {
             // ? Creates user and signs user in, returns object with user key to get user data
@@ -37,7 +41,7 @@ const Login = () => {
         // console.log(`INPUT NAME: `, e.target.name)
 
         // ? Copy UserInput, Then change one property
-        // ? (Will modify not add if new property would have been in spread)
+        // ? (Will modify not add if new property would have been in spread i.e if target was name, name would not be copied but reeplaced with new value)
         setuserInput(
             {
                 ...userInput,
@@ -48,7 +52,6 @@ const Login = () => {
     }
 
     return (
-
 
         <form
             className="form sign-in"
@@ -77,9 +80,7 @@ const Login = () => {
 
             <p className="forgot-pass">Forgot password?</p>
             <button type="button" className="submit" onClick={handleSignIn}>Sign In</button>
-            <button onClick={googleSignIn} type="button" className="loginBtn loginBtn--google">Connect with <span>Google</span></button>
-
-            {/* <input type="submit" value="Submit Form" /> */}
+            <button onClick={() => dispatch(googleSignInStart())} type="button" className="loginBtn loginBtn--google">Connect with <span>Google</span></button>
 
         </form>
 
