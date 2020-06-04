@@ -39,6 +39,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
     // ? Reference will ALWAYS return something even if nothing exsists, use snap to make sure something exsists 
     const userRef = firestore.doc(`users/${userAuth.uid}`);
 
+    // ! Sanpshot required to check if anything exsists at location
     const snapShot = await userRef.get();
 
 

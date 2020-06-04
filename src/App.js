@@ -5,7 +5,6 @@ import { createStructuredSelector } from 'reselect'
 import lodash from 'lodash'
 
 import { setCurrentUser } from "./redux/user/user-actions";
-import { selectShop } from "./redux/shop/shop-selectors";
 import { selectUserStatus } from './redux/user/selectors/user-selectors'
 
 import HomePage from "./pages/homepage/HomePage";
@@ -14,7 +13,7 @@ import UserAuth from './pages/user-handling/User-Auth';
 import Checkout from './pages/checkout/checkout'
 
 import Header from './components/navigation/Header';
-import { auth, createUserProfileDocument } from './components/config/firebase/firebase-util'
+// import { auth, createUserProfileDocument } from './components/config/firebase/firebase-util'
 
 import './App.css'
 
@@ -22,63 +21,62 @@ const App = () => {
 
   const structuredSelector = createStructuredSelector({
     currentUser: (state) => selectUserStatus(state)
-    // shop: (state) => selectShop(state)
   })
 
   const { currentUser } = useSelector(structuredSelector, lodash.isEqual)
 
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    let unsubscribeFromAuth = null;
-    let unsubscribeFromSnapShot = null;
+  //   let unsubscribeFromAuth = null;
 
-    const getUser = async () => {
+  //   const getUser = async () => {
 
-      // https://firebase.google.com/docs/auth/web/manage-users?authuser=0
-      // ? From auth library, This open subscription stays open as long as this component is mounted
-      // ? onAuthStateChanged will set observer to keep track of user state activity (Listens to any user sign in changes across our firebase project and will update if our user is signed in or signed out)
-      // ? It also returns an unsubscribe function that I will use when component unmounts
+  //     // https://firebase.google.com/docs/auth/web/manage-users?authuser=0
+  //     // ? From auth library, This open subscription stays open as long as this component is mounted
+  //     // ? onAuthStateChanged will set observer to keep track of user state activity (Listens to any user sign in changes across our firebase project and will update if our user is signed in or signed out)
+  //     // ? It also returns an unsubscribe function that I will use when component unmounts
 
-      // userAuth argument is given by onauth user state
-      // unsubscribeFromAuth = await auth.onAuthStateChanged(async (userAuth) => {
+  //     // userAuth argument is given by onauth user state
+  //     unsubscribeFromAuth = await auth.onAuthStateChanged(async (userAuth) => {
 
-      //   if (userAuth) {
+  //       if (userAuth) {
 
-      //     const userRef = await createUserProfileDocument(userAuth)
+  //         const userRef = await createUserProfileDocument(userAuth)
 
-      //     // ? set listener for any changes of data at that ref, and also first gets the original state of it to set data
-      //     unsubscribeFromSnapShot = userRef.onSnapshot((snapShot) => {
+  //         // ? set listener for any changes of data at that ref, and also first gets the original state of it to set data
+  //         userRef.onSnapshot((snapShot) => {
 
-      //       dispatch(setCurrentUser({
+  //           dispatch(setCurrentUser({
 
-      //         id: snapShot.id,
-      //         ...snapShot.data()
+  //             id: snapShot.id,
+  //             ...snapShot.data()
 
-      //       }))
+  //           }))
 
-      //     })
+  //         })
 
-      //   } else {
-      //     // console.log(userAuth)
-      //     // ? set current user to null (onAuth will return null if user signs out )
-      //     dispatch(setCurrentUser((userAuth)))
-      //   }
 
-      // })
 
-    }
+  //       } else {
+  //         // console.log(userAuth)
+  //         // ? set current user to null (onAuth will return null if user signs out )
+  //         dispatch(setCurrentUser((userAuth)))
+  //       }
 
-    getUser();
+  //     })
 
-    // ? unsub when component unmounts
-    return () => {
-      unsubscribeFromAuth();
-      unsubscribeFromSnapShot();
-    }
+  //   }
 
-  }, [])
+  //   getUser();
+
+  //   // ? unsub when component unmounts
+  //   return () => {
+  //     unsubscribeFromAuth();
+  //   }
+
+  // }, [])
 
 
   return (

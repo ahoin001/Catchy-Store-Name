@@ -15,16 +15,18 @@ export function* signInWithGoogle() {
 
         // ? Extract user object from auth object 
         const { user } = yield auth.signInWithPopup(googleProvider);
-        // console.log(`###### `, user)
+        console.log(`###### `, user)
 
         const userRef = yield call(createUserProfileDocument, user);
         const userSnapShot = yield userRef.get();
-
+        console.log(`Snapshot :`,userSnapShot)
+        const l = {...userSnapShot.data()}
+        console.log(l)
         // ? Use user Data to create action with user Object as payload
         // ? put sends return object back to redux flow
         yield put(googleSignInSuccess({
             id: userSnapShot.id,
-            ...userSnapShot
+            ...userSnapShot.data()
         }))
 
     } catch (error) {

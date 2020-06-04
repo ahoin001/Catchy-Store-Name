@@ -18,7 +18,7 @@ export const googleSignInStart = () => {
 
 export const googleSignInSuccess = (user) => {
     return {
-        type: UserActionTypes.GOOGLE_SIGN_IN_START,
+        type: UserActionTypes.GOOGLE_SIGN_IN_SUCESS,
         payload: user
     }
 }
@@ -32,21 +32,21 @@ export const googleSignInFailure = (error) => {
 
 export const emailSignInStart = (emailAndPassword) => {
     return {
-        type: UserActionTypes.GOOGLE_SIGN_IN_START,
+        type: UserActionTypes.EMAIL_SIGN_IN_START,
         payload: emailAndPassword
     }
 }
 
 export const emailSignInSuccess = (user) => {
     return {
-        type: UserActionTypes.GOOGLE_SIGN_IN_START,
+        type: UserActionTypes.EMAIL_SIGN_IN_SUCESS,
         payload: user
     }
 }
 
 export const emailSignInFailure = (error) => {
     return {
-        type: UserActionTypes.GOOGLE_SIGN_IN_FAILURE,
+        type: UserActionTypes.EMAIL_SIGN_IN_FAILURE,
         payload: error
     }
 }
