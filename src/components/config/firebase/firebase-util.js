@@ -93,7 +93,7 @@ export const convertCollectionSnapShotToMap = (collectionSnapshotObject) => {
 
         // ? Extract data from document
         const { title, items } = document.data();
-   
+
         // ? Return Data from document after adding route and id of object 
         return {
             // ? encode for routes
@@ -135,6 +135,19 @@ export const addCollectionAndDocumentss = async (collectionKey, objectsToAdd) =>
 
     await batch.commit()
 
+}
+
+// ? Observer that returns consumable promise
+export const getCurrentUser = () => {
+    return new Promise((resolve, reject) => {
+
+        // ? onAuth provides argument for userAuth
+        const unsubscribe = auth.onAuthStateChanged(userAuth => {
+            unsubscribe();
+            resolve(userAuth)
+        },reject)
+    }
+    )
 }
 
 export default firebase

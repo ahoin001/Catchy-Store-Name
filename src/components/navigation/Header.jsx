@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { auth } from '../config/firebase/firebase-util'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { selectCartVisibility } from '../../redux/cart-dropdown/selectors/cart'
 import { selectUserStatus } from '../../redux/user/selectors/user-selectors'
 
+import { signOutStart } from '../../redux/user/user-actions'
 import { HeaderContainer, LogoContainer, NavLinksContainer, StyledLink } from './header-styles'
 
 // ? Necesssary naming to import svg file
@@ -19,8 +19,6 @@ import lodash from 'lodash'
 // import './header-styles.scss'
 
 const Header = () => {
-
-    // const currentUser = useSelector((state) => selectUserStatus(state), lodash.isEqual)
 
     // ? When not memoized, this selector will run no matter what dispatch action ocurs
     // const cartDropdownHidden = useSelector((state) => 
@@ -41,9 +39,11 @@ const Header = () => {
 
     const { currentUser, cartDropdownHidden } = useSelector(structuredSelector, lodash.isEqual);
 
-    const signOut = async () => {
-        await auth.signOut();
-    }
+    const dispatch = useDispatch()
+
+    // const signOut = async () => {
+    //     await auth.signOut();
+    // }
 
     return (
         <HeaderContainer>
@@ -72,7 +72,7 @@ const Header = () => {
                         <StyledLink
                             as='div' // Replace styled component with new element, can be component
                             className="link"
-                            onClick={signOut}
+                            onClick={() => dispatch(signOutStart())}
                         >
                             SIGN OUT
                         </StyledLink>

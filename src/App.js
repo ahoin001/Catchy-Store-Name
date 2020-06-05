@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
-import { connect, useSelector } from 'react-redux'
+import { connect, useSelector, useDispatch } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import lodash from 'lodash'
 
 import { selectUserStatus } from './redux/user/selectors/user-selectors'
+import { checkUserSession } from './redux/user/user-actions'
 
 import HomePage from "./pages/homepage/HomePage";
 import Shop from './pages/shop/Shop';
@@ -22,6 +23,23 @@ const App = () => {
   })
 
   const { currentUser } = useSelector(structuredSelector, lodash.isEqual)
+
+  const dispatch = useDispatch()
+  // const checkUserSession = React.useCallback(
+  //   () => dispatch(checkUserSession()),
+  //   [dispatch]
+  // )
+
+  useEffect(() => {
+
+    const checkUserStatus = () => dispatch(checkUserSession())
+
+    checkUserStatus()
+
+    // return () => {
+    // this.unsubscribeFromAuth()
+    // }
+  }, [])
 
   return (
 

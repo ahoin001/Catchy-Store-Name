@@ -22,18 +22,6 @@ const Login = () => {
 
         dispatch(emailSignInStart({email, password}));
 
-
-        // try {
-        //     // ? Creates user and signs user in, returns object with user key to get user data
-        //     // ? This saves user in Firebase authentication, but not our database where user data can be used 
-        //     const { user } = await auth.signInWithEmailAndPassword(userInput.email, userInput.password)
-
-        //     console.log('User from sign up: ', user)
-
-        // } catch (error) {
-        //     console.log('Error creation', error)
-        // }
-
         // setuserInput({ email: '', password: '' })
         // console.log(`CLEARED INPUTS`)
 
