@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
 
-import { googleSignInStart } from '../../redux/user/user-actions'
+import { googleSignInStart, emailSignInStart, } from '../../redux/user/user-actions'
 
-import { googleSignIn, auth } from '../config/firebase/firebase-util'
 import FormInput from '../shared/forminput/FormInput'
 
 import './dynamic.scss'
@@ -19,19 +18,24 @@ const Login = () => {
 
         event.preventDefault();
 
-        try {
-            // ? Creates user and signs user in, returns object with user key to get user data
-            // ? This saves user in Firebase authentication, but not our database where user data can be used 
-            const { user } = await auth.signInWithEmailAndPassword(userInput.email, userInput.password)
+        const { email, password } = userInput
 
-            console.log('User from sign up: ', user)
+        dispatch(emailSignInStart({email, password}));
 
-        } catch (error) {
-            console.log('Error creation', error)
-        }
 
-        setuserInput({ email: '', password: '' })
-        console.log(`CLEARED INPUTS`)
+        // try {
+        //     // ? Creates user and signs user in, returns object with user key to get user data
+        //     // ? This saves user in Firebase authentication, but not our database where user data can be used 
+        //     const { user } = await auth.signInWithEmailAndPassword(userInput.email, userInput.password)
+
+        //     console.log('User from sign up: ', user)
+
+        // } catch (error) {
+        //     console.log('Error creation', error)
+        // }
+
+        // setuserInput({ email: '', password: '' })
+        // console.log(`CLEARED INPUTS`)
 
     }
 

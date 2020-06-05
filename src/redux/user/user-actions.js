@@ -1,32 +1,11 @@
 import UserActionTypes from './user-types'
 
-// ? Action Creator function to have reusable action object for certain types
+// ? Action Creator functions to have reusable action objects format for different action types
 // ? In this case I provide a user as payload for the action
-
-export const setCurrentUser = (user) => {
-    return {
-        type: UserActionTypes.SET_CURRENT_USER,
-        payload: user
-    }
-}
 
 export const googleSignInStart = () => {
     return {
         type: UserActionTypes.GOOGLE_SIGN_IN_START
-    }
-}
-
-export const googleSignInSuccess = (user) => {
-    return {
-        type: UserActionTypes.GOOGLE_SIGN_IN_SUCESS,
-        payload: user
-    }
-}
-
-export const googleSignInFailure = (error) => {
-    return {
-        type: UserActionTypes.GOOGLE_SIGN_IN_FAILURE,
-        payload: error
     }
 }
 
@@ -37,16 +16,16 @@ export const emailSignInStart = (emailAndPassword) => {
     }
 }
 
-export const emailSignInSuccess = (user) => {
+export const signInFailure = (error) => {
     return {
-        type: UserActionTypes.EMAIL_SIGN_IN_SUCESS,
-        payload: user
+        type: UserActionTypes.SIGN_IN_FAILURE,
+        payload: error
     }
 }
 
-export const emailSignInFailure = (error) => {
+export const signInSuccess = (user) => {
     return {
-        type: UserActionTypes.EMAIL_SIGN_IN_FAILURE,
-        payload: error
+        type: UserActionTypes.SIGN_IN_SUCCESS,
+        payload: user
     }
 }
