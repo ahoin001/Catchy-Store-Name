@@ -28,7 +28,7 @@ export const firestore = firebase.firestore();
 // firestore.collection('users'.doc('someDocumentId'))
 // firestore.doc('/users/someDocumentId/')
 
-// ? Save a user to DB as document using user data from auth
+// ? Save a user to DB as document if it does not exist already
 export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     if (!userAuth) {

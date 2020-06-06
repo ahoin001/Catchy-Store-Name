@@ -1,7 +1,12 @@
 import UserActionTypes from './user-types'
 
 // ? Action Creator functions to have reusable action objects format for different action types
-// ? In this case I provide a user as payload for the action
+
+export const checkUserSession = () => {
+    return {
+        type: UserActionTypes.CHECK_USER_SESSION,
+    }
+}
 
 export const googleSignInStart = () => {
     return {
@@ -16,15 +21,31 @@ export const emailSignInStart = (emailAndPassword) => {
     }
 }
 
+export const signUpStart = (userAuthData) => {
+    return {
+        type: UserActionTypes.SIGN_UP_START,
+        payload: userAuthData
+    }
+}
+
 export const signOutStart = () => {
     return {
         type: UserActionTypes.SIGN_OUT_START,
     }
 }
 
+
+
 export const signOutSuccess = () => {
     return {
         type: UserActionTypes.SIGN_OUT_SUCCESS,
+    }
+}
+
+export const signOutFailure = (error) => {
+    return {
+        type: UserActionTypes.SIGN_OUT_FAILURE,
+        payload: error
     }
 }
 
@@ -42,17 +63,20 @@ export const signInFailure = (error) => {
     }
 }
 
-export const signOutFailure = (error) => {
+export const signUpSuccess = ({ user, additionalData }) => {
     return {
-        type: UserActionTypes.SIGN_OUT_FAILURE,
+        type: UserActionTypes.SIGN_UP_SUCCESS,
+        payload: { user, additionalData }
+    }
+}
+
+export const signUpFailure = (error) => {
+    return {
+        type: UserActionTypes.SIGN_UP_FAILURE,
         payload: error
     }
 }
 
 
 
-export const checkUserSession = () => {
-    return {
-        type: UserActionTypes.CHECK_USER_SESSION,
-    }
-}
+

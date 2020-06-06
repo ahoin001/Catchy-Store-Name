@@ -20,10 +20,7 @@ const Login = () => {
 
         const { email, password } = userInput
 
-        dispatch(emailSignInStart({email, password}));
-
-        // setuserInput({ email: '', password: '' })
-        // console.log(`CLEARED INPUTS`)
+        dispatch(emailSignInStart({ email, password }));
 
     }
 

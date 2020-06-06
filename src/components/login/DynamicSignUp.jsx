@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'
+
+import { signUpStart } from '../../redux/user/user-actions'
 import FormInput from '../shared/forminput/FormInput'
-import { auth, createUserProfileDocument } from '../config/firebase/firebase-util'
 
 import './dynamic.scss'
 import '../shared/button/google-button.scss'
@@ -9,6 +11,7 @@ const Login = () => {
 
     const [userInput, setuserInput] = useState({ name: '', email: '', password: '' })
 
+    const dispatch = useDispatch()
 
     const handleSignUp = async (event) => {
 
@@ -16,29 +19,7 @@ const Login = () => {
 
         const { name, email, password } = userInput
 
-        try {
-
-            // ? Creates user and signs user in, returns object with user key to get user data
-            // ? This saves user in Firebase authentication, but not our database where user data can be used 
-            const { user } = await auth.createUserWithEmailAndPassword(email, password)
-
-            console.log('User from sign up: ', user)
-
-            // ? Save the user as a document to firestore
-            await createUserProfileDocument(user, { name })
-
-            // Clear form 
-            setuserInput(
-                {
-                    name: '',
-                    email: '',
-                    password: '',
-                }
-            )
-
-        } catch (error) {
-            console.log('Error creation',error)
-        }
+        dispatch(signUpStart({ name, email, password }))
 
     }
 
@@ -93,15 +74,6 @@ const Login = () => {
                 label='Password'
                 required
             />
-
-            {/* <FormInput
-                name='confirmPassword'
-                type='password'
-                handleChange={handleUserInput}
-                value={userInput.password}
-                label='Confirm Password'
-                required
-            /> */}
 
             <button type="button" className="submit" onClick={handleSignUp}>Sign Up</button>
             <button onClick={() => { }} type="button" className="loginBtn loginBtn--google">Join with <span>Google</span></button>
