@@ -23,6 +23,13 @@ export default (state = initialState, action) => {
                     action.payload)
             }
 
+            case cartActionTypes.CLEAR_CART:
+            return {
+                ...state,
+                cartItems: [],
+                hideCart: true
+            }
+
         case cartActionTypes.REMOVE_ITEM_FROM_CART:
             return {
                 ...state,

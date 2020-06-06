@@ -96,24 +96,6 @@ export function* signOut() {
 
 }
 
-
-
-// ***************************************************************
-//  Export Sagas
-// ***************************************************************
-
-// ? Export Sagas to root rootSaga
-export function* userSagas() {
-
-    yield all([
-        call(onGoogleSignInStart),
-        call(onEmailSignInStart),
-        call(onCheckUserSession),
-        call(onSignOutStart)
-    ])
-
-}
-
 // ***************************************************************
 //  Helpers
 // ***************************************************************
@@ -136,3 +118,21 @@ export function* getSnapshotFromUserAuthAndDispatchSignInSuccess(userAuth) {
     }
 
 }
+
+// ***************************************************************
+//  Export Sagas
+// ***************************************************************
+
+// ? Export Sagas to root rootSaga
+export function* userSagas() {
+
+    yield all([
+        call(onGoogleSignInStart),
+        call(onEmailSignInStart),
+        call(onCheckUserSession),
+        call(onSignOutStart)
+    ])
+
+}
+
+
