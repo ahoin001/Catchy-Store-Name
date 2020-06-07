@@ -78,8 +78,6 @@ const Login = () => {
             <button type="button" className="submit" onClick={handleSignUp}>Sign Up</button>
             <button onClick={() => { }} type="button" className="loginBtn loginBtn--google">Join with <span>Google</span></button>
 
-            {/* <input type="submit" value="Submit Form" /> */}
-
         </form>
 
     );

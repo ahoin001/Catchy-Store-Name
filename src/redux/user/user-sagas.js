@@ -82,7 +82,7 @@ export function* signInWithGoogle() {
 
         // ? Extract user auth object from auth sign in 
         const { user } = yield auth.signInWithPopup(googleProvider);
-        console.log(`###### `, user)
+        // console.log(`###### `, user)
 
         yield getSnapshotFromUserAuthAndDispatchSignInSuccess(user)
 
@@ -135,7 +135,7 @@ export function* signOut() {
 export function* getSnapshotFromUserAuthAndDispatchSignInSuccess(userAuth, additionalData) {
 
     try {
-        console.log(userAuth)
+        // console.log(userAuth)
         const userRef = yield call(createUserProfileDocument, userAuth, additionalData);
         const userSnapShot = yield userRef.get();
 

@@ -25,21 +25,16 @@ const App = () => {
   const { currentUser } = useSelector(structuredSelector, lodash.isEqual)
 
   const dispatch = useDispatch()
-  // const checkUserSession = React.useCallback(
-  //   () => dispatch(checkUserSession()),
-  //   [dispatch]
-  // )
+  const checkUserStatus = React.useCallback(
+    () => dispatch(checkUserSession()),
+    [dispatch]
+  )
 
   useEffect(() => {
 
-    const checkUserStatus = () => dispatch(checkUserSession())
-
     checkUserStatus()
 
-    // return () => {
-    // this.unsubscribeFromAuth()
-    // }
-  }, [])
+  },[checkUserStatus])
 
   return (
 

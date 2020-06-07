@@ -2,6 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
+// import WithSpinner from '../../components/with-spinner/with-spinner'
+
 import CollectionItem from '../../components/collection-item/CollectionItem'
 import { selectStoreCollection } from '../../redux/shop/shop-selectors'
 

@@ -7,7 +7,9 @@ import { SpinnerOverlay, SpinnerContainer } from './with-spinner-styles'
 const WithSpinner = WrappedComponent => {
 
     const Spinner = ({ isLoading, ...otherProps }) => {
-        // console.log('&&&&&&& IS FETCHING? : ',isLoading)
+        const c = {...otherProps}
+        console.log(`+++++++++Should be loading? ${isLoading}`)
+        console.log(`+++++++++Props passed to spinner? ${c}`)
         return isLoading ? (
             <SpinnerOverlay>
                 <SpinnerContainer />
@@ -17,8 +19,6 @@ const WithSpinner = WrappedComponent => {
             (
                 <WrappedComponent {...otherProps} />
             )
-
-
 
     };
 
