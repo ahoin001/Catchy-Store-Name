@@ -23,9 +23,9 @@ export const selectCollectionsForPreview = createSelector(
 // ? USES THE HASH MAP
 export const selectStoreCollection = (collectionUrlParam) => createSelector(
     [selectShopCollections],
-    shopCollection => {
-        console.log(`shop specific collection selector: `, shopCollection[collectionUrlParam])
-        return shopCollection ? shopCollection[collectionUrlParam] : null
+    shopCollections => {
+        console.log(`shop specific collection selector: `, shopCollections[collectionUrlParam])
+        return shopCollections ? shopCollections[collectionUrlParam] : null
     }
 
 )

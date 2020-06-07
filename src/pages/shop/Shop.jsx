@@ -8,14 +8,7 @@ import { fetchCollectionsStart } from '../../redux/shop/shop-actions'
 import CollectionPageContainer from '../collection/collection-container'
 import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview-container';
 
-import Collection from '../collection/collection'
-
 import './shop.scss'
-import WithSpinner from '../../components/with-spinner/with-spinner';
-
-
-
-const CollectionWithSpinner = WithSpinner(Collection)
 
 // ? Shop component is nested in a route (check App.js) Route passes map, location and history props
 const Shop = ({ match }) => {
@@ -49,7 +42,7 @@ const Shop = ({ match }) => {
 
             <Route
                 path={`${match.path}/:collectionId`}
-                component={CollectionWithSpinner}
+                component={CollectionPageContainer}
             />
 
         </div>

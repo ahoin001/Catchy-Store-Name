@@ -4,12 +4,11 @@ import { SpinnerOverlay, SpinnerContainer } from './with-spinner-styles'
 // ? HOC that will display loading screen if the component is not ready to be rendered
 
 // ? WithSpinner takes a component I want to wrap, then passes it to another component that will wrap and use it in someway
-const WithSpinner = WrappedComponent => {
+const WithSpinner = (WrappedComponent) => {
 
+    // ? Deconstructs props from passed component
     const Spinner = ({ isLoading, ...otherProps }) => {
-        const c = {...otherProps}
-        console.log(`+++++++++Should be loading? ${isLoading}`)
-        console.log(`+++++++++Props passed to spinner? ${c}`)
+
         return isLoading ? (
             <SpinnerOverlay>
                 <SpinnerContainer />
