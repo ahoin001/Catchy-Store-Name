@@ -1,0 +1,36 @@
+.header {
+  height: 70px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between; // Pushes  containers as far apart as posssible
+  align-items: center;
+  margin-bottom: 25px;
+  //   background-color: green;
+
+  .logo-container {
+    // width: 40px;
+    // height: 100%;
+    // padding: 16px;
+
+    // background-color: coral;
+  }
+
+  .logo {
+    width: 50px;
+  }
+
+  .nav-links {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    // background-color: lightblue;
+
+    .link {
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+  }
+}
