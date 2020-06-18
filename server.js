@@ -3,13 +3,11 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const path = require('path')
 
-// ? env is in git ignore so not available on repo
-
 // If not in production (we are in devlopment or testing) , load .env into proccess environment for use with config
 if (process.env.NODE_ENV !== 'production') require('dotenv').config()
-console.log(process.env.STRIPE_SECRET_KEY)
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
+
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const app = express();
 
 // ? Heroku provided port, or port 5000 for testing
@@ -21,13 +19,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // ? Allow access from our origin
 app.use(cors())
 
-// Heroku will determine what to do based on url path
 if (process.env.NODE_ENV === 'production') {
 
     // static allows serving a file, path used to get dir name, and serve it all files in the client/build folder
     app.use(express.static(path.join(__dirname, 'client/build')))
 
-    // Return html file that holds all of build
+    // Return client build index.html
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
     });

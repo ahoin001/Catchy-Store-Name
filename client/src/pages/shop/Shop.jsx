@@ -8,7 +8,7 @@ import { fetchCollectionsStart } from '../../redux/shop/shop-actions'
 import CollectionPageContainer from '../collection/collection-container'
 import CollectionsOverviewContainer from '../../components/collections-overview/collections-overview-container';
 
-import './shop.scss'
+// import './shop.scss'
 
 // ? Shop component is nested in a route (check App.js) Route passes map, location and history props
 const Shop = ({ match }) => {
