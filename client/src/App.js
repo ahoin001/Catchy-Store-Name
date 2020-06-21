@@ -14,7 +14,9 @@ import Checkout from './pages/checkout/checkout'
 
 import Header from './components/navigation/Header';
 
-import './App.css'
+import { GlobalStyle } from './globalstyles'
+
+// import './App.css'
 
 const App = () => {
 
@@ -34,11 +36,13 @@ const App = () => {
 
     checkUserStatus()
 
-  },[checkUserStatus])
+  }, [checkUserStatus])
 
   return (
 
-    <div className="App">
+    <div >
+
+    <GlobalStyle/>
 
       {/* Place Header here so it persists above all components rendered by switch */}
       <Header />
@@ -81,6 +85,7 @@ const App = () => {
     </div>
 
   );
+
 };
 
 export default connect()(App);
