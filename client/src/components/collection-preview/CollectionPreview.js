@@ -3,17 +3,22 @@ import CollectionItem from '../collection-item/CollectionItem'
 
 import './collection-preview.scss'
 
+import {
+    CollectionPreviewContainer,
+    TitleContainer,
+    PreviewContainer
+} from './collection-preview-styles';
 
 const CollectionPreview = (props) => {
 
-    // console.log(`PROPS IM LOOGIN FOR &&&&&&&&`,props)
+    // console.log(`PROPS IM LOGIN FOR &&&&&&&&`,props)
 
     return (
-        <div className="collection-preview-container">
+        <CollectionPreviewContainer>
 
-            <h1 className="collection-title">{props.title.toUpperCase()}</h1>
+            <TitleContainer>{props.title.toUpperCase()}</TitleContainer>
 
-            <div className="collection-preview">
+            <PreviewContainer>
 
                 {/* Render 9 menu items from each collection for their preview */}
                 {
@@ -23,9 +28,9 @@ const CollectionPreview = (props) => {
                         })
                 }
 
-            </div>
+            </PreviewContainer>
 
-        </div>
+        </CollectionPreviewContainer>
     );
 
 };

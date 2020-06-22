@@ -1,22 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux'
+
 import { addCartItem } from '../../redux/cart-dropdown/cart-dropdown-actions'
 
-import {CollectionItemContainer,
+import {
+    CollectionItemContainer,
     BackgroundImage,
     CollectionFooterContainer,
     NameContainer,
     PriceContainer,
-    AddButton} from './collection-item-styles'
+    AddButton
+} from './collection-item-styles'
 
 const CollectionItem = (props) => {
 
     return (
         <CollectionItemContainer>
 
-            <BackgroundImage imageUrl={props.item.imageUrl}>
-
-            </BackgroundImage>
+            <BackgroundImage imageUrl={props.item.imageUrl} />
 
             <CollectionFooterContainer>
                 <NameContainer> {props.item.name}</NameContainer>
