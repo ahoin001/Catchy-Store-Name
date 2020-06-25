@@ -19,7 +19,7 @@ export const CollectionItemContainer = styled.div`
     }
   }
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 750px) {
     width: 40vw;
 
     &:hover {
@@ -44,7 +44,10 @@ export const AddButton = styled(CustomButton)`
   @media screen and (max-width: 800px) {
    display: block;
    opacity: .9;
+   
+   /* ? Resets property to it's inherit value (Override min-width of button in this project) */
    min-width:unset;
+
    padding: 0 10px 0 10px;
   }
 
